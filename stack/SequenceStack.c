@@ -10,13 +10,16 @@ typedef struct {
 }SqStack;
 
 // 初始化栈
-void initStack(SqStack *stack)
+SqStack* initStack()
 {
+    SqStack *stack;
+    stack = (SqStack *)malloc(sizeof(SqStack));
     stack->top = -1;
+    return stack;
 }
 
 // 判断栈空
-void isEmpty(SqStack *stack)
+int isEmpty(SqStack *stack)
 {
     if (stack->top == -1) {
         return 1;
@@ -25,10 +28,20 @@ void isEmpty(SqStack *stack)
     }
 }
 
+// 判断栈满
+int isFull(SqStack *stack)
+{
+    if (stack->top == maxSize - 1) {
+        return 1;
+    } else {
+        return 0;
+    }
+} 
+
 // 进栈
 int push(SqStack *stack, int x)
 {
-    if (stack->top == maxSize-1) {
+    if (isFull(stack)) {
         return 0;
     }
     ++(stack->top);
@@ -39,12 +52,41 @@ int push(SqStack *stack, int x)
 // 出栈
 int pop(SqStack *stack, int *x)
 {
-    if (stack->top == -1) {
+    if (isEmpty(stack)) {
         return 0;
     }
     *x = stack->data[stack->top];
     --(stack->top);
     return 1;
+}
+
+void pushArrToStack(SqStack *stack, int arr[], int n)
+{
+    for (int i = 0; i < n; i++) {
+        push(stack, arr[i]);
+    }
+}
+
+void popArrFromStack(SqStack *stack)
+{
+    int *data;
+    data = (int *)malloc(sizeof(int));
+    while (pop(stack, data)) {
+        printf("%d ", *data);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    SqStack *stack = initStack();
+    int arr[5] = {1,2,3,4,5};
+
+    pushArrToStack(stack, arr, 5);
+    
+    popArrFromStack(stack);
+    
+    return 0;
 }
 
 
