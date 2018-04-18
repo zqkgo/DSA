@@ -60,7 +60,10 @@ int main()
     root->lchild = newNode('B');
     root->rchild = newNode('C');
     root->lchild->lchild = newNode('D');
+    root->lchild->lchild->lchild = newNode('H');
     root->lchild->rchild = newNode('E');
+    root->lchild->rchild->lchild = newNode('I');
+    root->lchild->rchild->rchild = newNode('J');
     root->rchild->lchild = newNode('F');
     root->rchild->rchild = newNode('G');
 
