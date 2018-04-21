@@ -61,3 +61,25 @@ int deQueue(SequenceQueue *queue, int *x)
     *x = queue->data[queue->front];
     return 1;
 }
+
+void printQueue(SequenceQueue *queue)
+{
+    if (!isEmpty(queue)) {
+        for (int i = queue->front + 1; i <= queue->rear; i++) {
+            printf("%d ", queue->data[i]);
+        } 
+        printf("\n");
+    }
+}
+
+int main()
+{
+    SequenceQueue *queue;
+    queue = initQueue();
+    enQueue(queue, 1);
+    enQueue(queue, 2);
+    enQueue(queue, 3);
+    enQueue(queue, 4);
+    enQueue(queue, 5);
+    printQueue(queue);
+}

@@ -12,7 +12,7 @@ typedef struct {
 int insertElem(SqList *L, int p, int e);
 int deleteElem(SqList *L, int p, int *e);
 
-int main( )
+int main()
 {
     SqList *list;
     list = (SqList *)malloc(sizeof(SqList));
@@ -35,6 +35,7 @@ int insertElem(SqList *L, int p, int e)
     if (p < 0 || p > L->length || L->length == maxSize)
         return 0;
 
+    // move
     for (i = L->length-1; i >= p; i--) {
         L->data[i+1] = L->data[i];
     }
@@ -51,6 +52,7 @@ int deleteElem(SqList *L, int p, int *e)
         return -1;
     }
     *e = L->data[p];
+    // move
     for (i = p; i < L->length-1; i++) {
         L->data[i] = L->data[i+1];
     }

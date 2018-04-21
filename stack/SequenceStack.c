@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define maxSize 100
+#define MAXSIZE 100
 
 // 顺序栈
 typedef struct {
-    int data[maxSize];
+    int data[MAXSIZE];
     int top;
 }SqStack;
 
@@ -31,7 +31,7 @@ int isEmpty(SqStack *stack)
 // 判断栈满
 int isFull(SqStack *stack)
 {
-    if (stack->top == maxSize - 1) {
+    if (stack->top == MAXSIZE - 1) {
         return 1;
     } else {
         return 0;

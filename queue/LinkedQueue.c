@@ -64,3 +64,28 @@ int deQueue(LinkedQueue *queue, int *x)
     free(node);
     return 1;
 }
+
+void printQueue(LinkedQueue *queue)
+{
+    if (!isEmpty(queue)) {
+        QueueNode *current;
+        current = queue->front;
+        while (current != NULL) {
+            printf("%d ", current->data);
+            current = current->next;
+        }
+    }
+}
+
+int main()
+{
+    LinkedQueue *queue;
+    queue = initQueue();
+    enQueue(queue, 1);
+    enQueue(queue, 2);
+    enQueue(queue, 3);
+    enQueue(queue, 4);
+    enQueue(queue, 5);
+    printQueue(queue);
+    return 0;
+}

@@ -75,6 +75,7 @@ void insertNode(DLNode *node, int a, int b)
 {
     DLNode *before, *after;
     before = findNode(node, a);
+    // add two links, update two links
     after->data = b;
     after->next = before->next;
     after->prior = before;
