@@ -21,6 +21,8 @@ void insert(Node *root, int data)
 	Node *current, *prev;
 	current = root;
 	while (current != NULL) {
+		// before turn to left or right
+		// need to remember the previous node
 		prev = current;
 		if (data < current->data) {
 			current = current->left;
