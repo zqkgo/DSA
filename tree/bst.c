@@ -3,47 +3,53 @@
 
 typedef struct Node
 {
-	int data;
+	int key;
+	int val;
+	int N;
 	struct Node *left;
 	struct Node *right;
 }Node;
 
-Node* newNode(int data)
+int size(Node *node)
+{
+	if (node == NULL) {
+		return 0;
+	} else {
+		return node->N;
+	}
+}
+
+Node* newNode(int key, int val)
 {
 	Node *node = (Node *)malloc(sizeof(Node));
-	node->data = data;
+	node->key = key;
+	node->val = val;
+	node->N = 1;
 	node->left = node->right = NULL;
 	return node;
 }
 
-void insert(Node *root, int data)
+Node* insert(Node *node, int key, int val)
 {
-	Node *current, *prev;
-	current = root;
-	while (current != NULL) {
-		// before turn to left or right
-		// need to remember the previous node
-		prev = current;
-		if (data < current->data) {
-			current = current->left;
-		} else {
-			current = current->right;
-		}
+	if (node == NULL) {
+		return newNode(key, val);
 	}
-
-	Node *node = newNode(data);
-	if (prev->data > data) {
-		prev->left = node;
+	if (key < node->key) {
+		node->left = insert(node->left, key, val);
+	} else if (key > node->key) {
+		node->right = insert(node->right, key, val);
 	} else {
-		prev->right = node;
+		node->val = val;
 	}
+	node->N = size(node->left) + size(node->right) + 1;
+	return node;
 }
 
 void inOrder(Node *current)
 {
 	if (current != NULL) {
 		inOrder(current->left);
-		printf("%d ", current->data);
+		printf("key: %d , val: %d, child-nodes: %d\n", current->key, current->val, current->N);
 		inOrder(current->right);
 	}
 }
@@ -51,7 +57,7 @@ void inOrder(Node *current)
 void preOrder(Node *current)
 {
 	if (current != NULL) {
-		printf("%d ", current->data);
+		printf("key: %d , val: %d, child-nodes: %d\n", current->key, current->val, current->N);
 		preOrder(current->left);
 		preOrder(current->right);
 	}
@@ -62,28 +68,29 @@ void postOrder(Node *current)
 	if (current != NULL) {
 		postOrder(current->left);
 		postOrder(current->right);
-		printf("%d ", current->data);
+		printf("key: %d , val: %d, child-nodes: %d\n", current->key, current->val, current->N);
 	}
 }
 
 int main()
 {
-	Node *root = newNode(50);
-	insert(root, 30);
-	insert(root, 40);
-	insert(root, 100);
-	insert(root, 80);
-	insert(root, 10);
-	insert(root, 90);
-	printf("In-order traversal: ");
+	Node *root = newNode(50, 100);
+	insert(root, 30, 678);
+	insert(root, 60, 54);
+	insert(root, 25, 67);
+	insert(root, 35, 90);
+	insert(root, 55, 12);
+	insert(root, 70, 45);
+	insert(root, 20, 12);
+	printf("In-order traversal: \n");
 	inOrder(root);
 	printf("\n");
 	
-	printf("Pre-order traversal: ");
+	printf("Pre-order traversal: \n");
 	preOrder(root);
 	printf("\n");
 
-	printf("Post-order traversal: ");
+	printf("Post-order traversal: \n");
 	postOrder(root);
 	printf("\n");
 
