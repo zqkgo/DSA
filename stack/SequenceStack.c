@@ -14,7 +14,7 @@ SqStack* initStack()
 {
     SqStack *stack;
     stack = (SqStack *)malloc(sizeof(SqStack));
-    stack->top = -1;
+    stack->top = -1; // important
     return stack;
 }
 
